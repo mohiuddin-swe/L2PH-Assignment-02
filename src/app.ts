@@ -5,21 +5,19 @@ import express, {
   type Request,
   type Response,
 } from "express";
+import logger from "./middleware/logger";
+
+import { userRoute } from "./modules/user/user.route";
+import { authRoute } from "./modules/auth/auth.route";
+import globalErrorHandler from "./middleware/globalErrorHandler";
 
 const app: Application = express();
-import { userRoute } from "./modules/user/user.route";
 
 app.use(CookieParser());
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
-
-
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  }),
-);
+app.use(logger);
 
 app.get("/", (req: Request, res: Response) => {
   //res.send("Hello World!");
@@ -30,7 +28,10 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/auth", userRoute);
+app.use("/api/auth", authRoute);
 
+// Global Error Handling Middleware
+app.use(globalErrorHandler);
 
 
 

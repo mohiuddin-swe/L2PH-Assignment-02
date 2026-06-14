@@ -12,3 +12,13 @@ Method -> POST - Time -> 1781425170071 - URL -> /api/auth/signup
 Method -> POST - Time -> 1781425176602 - URL -> /api/auth/signup
 
 Method -> POST - Time -> 1781425254830 - URL -> /api/auth/login
+
+Method -> POST - Time -> 1781426131449 - URL -> /api/auth/login
+
+Method -> POST - Time -> 1781426209035 - URL -> /api/auth/login
+
+Method -> POST - Time -> 1781426213287 - URL -> /api/auth/login
+
+Method -> POST - Time -> 1781426257387 - URL -> /api/auth/signup
+
+Method -> POST - Time -> 1781426270995 - URL -> /api/auth/login

@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { issueService } from "./issues.service";
 
+
 const createIssue = async (
   req: Request,
   res: Response
@@ -51,8 +52,48 @@ const getAllIssues = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleIssue = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const id = Number(req.params.id);
+
+    if (isNaN(id) || id <= 0) {
+      res.status(400).json({
+        success: false,
+        message: "Invalid issue id",
+      });
+      return;
+    }
+
+    const result = await issueService.getSingleIssueFromDB(id);
+
+    if (!result) {
+      res.status(404).json({
+        success: false,
+        message: "Issue not found",
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Issue retrived successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Internal Server Error",
+    });
+  }
+};
+
+
 export const issueController = {
   createIssue,
   getAllIssues,
+  getSingleIssue,
 
 };

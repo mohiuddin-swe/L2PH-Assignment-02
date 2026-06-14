@@ -19,10 +19,105 @@ const createIssueIntoDB = async (
 
   return result.rows[0];
 };
+const getAllIssuesFromDB = async (query: {
+  sort?: string;
+  type?: string;
+  status?: string;
+}) => {
+  let sql = `
+    SELECT *
+    FROM issues
+  `;
 
+  const conditions: string[] = [];
+  const values: string[] = [];
 
+  // type filter
+  if (query.type) {
+    values.push(query.type);
+    conditions.push(`type = $${values.length}`);
+  }
+
+  // status filter
+  if (query.status) {
+    values.push(query.status);
+    conditions.push(`status = $${values.length}`);
+  }
+
+  if (conditions.length > 0) {
+    sql += ` WHERE ${conditions.join(" AND ")}`;
+  }
+
+  // sorting
+  if (query.sort === "oldest") {
+    sql += ` ORDER BY created_at ASC`;
+  } else {
+    sql += ` ORDER BY created_at DESC`;
+  }
+
+  // Get issues
+  const issuesResult = await pool.query(sql, values);
+
+  const issues = issuesResult.rows;
+
+  if (issues.length === 0) {
+    return [];
+  }
+
+  // ----------------------------
+  // Fetch reporters (NO JOIN)
+  // ----------------------------
+
+  const reporterIds = [
+    ...new Set(
+      issues.map((issue) => issue.reporter_id)
+    ),
+  ];
+
+  const placeholders = reporterIds
+    .map((_, index) => `$${index + 1}`)
+    .join(",");
+
+  const reportersResult = await pool.query(
+    `
+    SELECT
+      id,
+      name,
+      role
+    FROM users
+    WHERE id IN (${placeholders})
+    `,
+    reporterIds
+  );
+
+  // Create reporter map
+
+  const reporterMap: Record<number, any> = {};
+
+  reportersResult.rows.forEach((user) => {
+    reporterMap[user.id] = user;
+  });
+
+  // Attach reporter object
+
+  const finalData = issues.map((issue) => ({
+    id: issue.id,
+    title: issue.title,
+    description: issue.description,
+    type: issue.type,
+    status: issue.status,
+
+    reporter: reporterMap[issue.reporter_id],
+
+    created_at: issue.created_at,
+    updated_at: issue.updated_at,
+  }));
+
+  return finalData;
+};
 
 export const issueService = {
   createIssueIntoDB,
+    getAllIssuesFromDB,
 
 };

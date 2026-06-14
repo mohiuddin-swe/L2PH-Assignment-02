@@ -26,3 +26,23 @@ Method -> POST - Time -> 1781426270995 - URL -> /api/auth/login
 Method -> POST - Time -> 1781429052799 - URL -> /api/auth/login
 
 Method -> POST - Time -> 1781429100650 - URL -> /api/issues
+
+Method -> POST - Time -> 1781429331595 - URL -> /api/issues
+
+Method -> POST - Time -> 1781429342641 - URL -> /api/auth/login
+
+Method -> POST - Time -> 1781429374418 - URL -> /api/issues
+
+Method -> GET - Time -> 1781429403612 - URL -> /api/issues
+
+Method -> GET - Time -> 1781429425044 - URL -> /api/issues?sort=newest
+
+Method -> GET - Time -> 1781429438654 - URL -> /api/issues?sort=oldest
+
+Method -> GET - Time -> 1781429723662 - URL -> /api/issues?sort=oldest
+
+Method -> GET - Time -> 1781429776711 - URL -> /api/issues?sort=oldest
+
+Method -> GET - Time -> 1781429974839 - URL -> /api/issues?sort=oldest
+
+Method -> GET - Time -> 1781429988817 - URL -> /api/issues?sort=newest

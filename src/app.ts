@@ -1,14 +1,13 @@
 import CookieParser from "cookie-parser";
-import cors from "cors";
 import express, {
   type Application,
   type Request,
   type Response,
 } from "express";
 import logger from "./middleware/logger";
-
 import { userRoute } from "./modules/user/user.route";
 import { authRoute } from "./modules/auth/auth.route";
+import { issueRoutes } from "./modules/issues/issues.route";
 import globalErrorHandler from "./middleware/globalErrorHandler";
 
 const app: Application = express();
@@ -29,6 +28,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/auth", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/issues", issueRoutes);
 
 // Global Error Handling Middleware
 app.use(globalErrorHandler);

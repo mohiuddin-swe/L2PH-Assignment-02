@@ -1,0 +1,14 @@
+
+Method -> POST - Time -> 1781424775501 - URL -> /api/users/
+
+Method -> POST - Time -> 1781424816693 - URL -> /api/auth/signup
+
+Method -> POST - Time -> 1781425008803 - URL -> /api/auth/signup
+
+Method -> POST - Time -> 1781425122637 - URL -> /api/auth/signup
+
+Method -> POST - Time -> 1781425170071 - URL -> /api/auth/signup
+
+Method -> POST - Time -> 1781425176602 - URL -> /api/auth/signup
+
+Method -> POST - Time -> 1781425254830 - URL -> /api/auth/login

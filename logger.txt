@@ -130,3 +130,19 @@ Method -> DELETE - Time -> 1781435036531 - URL -> /api/issues/2
 Method -> POST - Time -> 1781435046855 - URL -> /api/auth/login
 
 Method -> DELETE - Time -> 1781435063920 - URL -> /api/issues/2
+
+Method -> POST - Time -> 1781467952276 - URL -> /api/auth/login
+
+Method -> GET - Time -> 1781467967663 - URL -> /api/issues?sort=newest
+
+Method -> GET - Time -> 1781467974680 - URL -> /api/issues/3
+
+Method -> GET - Time -> 1781467995253 - URL -> /
+
+Method -> GET - Time -> 1781467995436 - URL -> /favicon.ico
+
+Method -> POST - Time -> 1781468054889 - URL -> /api/auth/login
+
+Method -> GET - Time -> 1781468059322 - URL -> /api/issues/3
+
+Method -> GET - Time -> 1781468063805 - URL -> /api/issues/10

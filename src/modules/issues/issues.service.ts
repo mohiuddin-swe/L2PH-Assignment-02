@@ -228,8 +228,9 @@ const updateIssueFromDB = async (
 };
 
 const deleteIssueFromDB = async (
-  id: string,
+  id: number,
   user: {
+    id: number;
     role: string;
   }
 ) => {

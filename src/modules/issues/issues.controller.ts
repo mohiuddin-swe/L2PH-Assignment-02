@@ -95,7 +95,7 @@ const updateIssue = async (
   res: Response
 ): Promise<void> => {
   try {
-    const id = req.params.id;
+    const id = String(req.params.id);
 
     if (!id) {
       res.status(400).json({
@@ -163,7 +163,7 @@ const deleteIssue = async (
   res: Response
 ): Promise<void> => {
   try {
-    const id = req.params.id;
+    const id = String(req.params.id);
 
     if (!id) {
       res.status(400).json({
@@ -181,10 +181,13 @@ const deleteIssue = async (
       return;
     }
 
-    const result = await issueService.deleteIssueFromDB(
-      id,
-      req.user
-    );
+const result = await issueService.deleteIssueFromDB(
+  Number(id),
+  {
+    id: req.user.id,
+    role: req.user.role,
+  }
+);
 
     if (!result) {
       res.status(404).json({

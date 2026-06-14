@@ -226,9 +226,33 @@ const updateIssueFromDB = async (
   // Return exactly the updated issue
   return result.rows[0];
 };
+
+const deleteIssueFromDB = async (
+  id: string,
+  user: {
+    role: string;
+  }
+) => {
+  // Maintainer only
+  if (user.role !== "maintainer") {
+    throw new Error("Only maintainer can delete issues");
+  }
+
+  const result = await pool.query(
+    `
+    DELETE FROM issues
+    WHERE id=$1
+    `,
+    [id]
+  );
+
+  return result.rowCount;
+};
+
 export const issueService = {
   createIssueIntoDB,
     getAllIssuesFromDB,
     getSingleIssueFromDB,
-    updateIssueFromDB
+    updateIssueFromDB,
+    deleteIssueFromDB
 };
